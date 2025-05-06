@@ -29,29 +29,57 @@ const Header: React.FC = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
-      }`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        transition: 'all 0.3s',
+        backgroundColor: scrolled ? '#ffffff' : 'transparent',
+        padding: scrolled ? '0.5rem 0' : '1rem 0',
+        boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
+      }}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo */}
           <Link href="#home">
-            <span className={`font-great-vibes text-2xl @md:text-3xl ${scrolled ? 'text-primary' : 'text-white'}`}>
+            <span style={{ 
+              fontFamily: 'var(--font-great-vibes), cursive', 
+              fontSize: '1.5rem', 
+              color: scrolled ? '#4f8e62' : '#ffffff'
+            }}>
               Tâm & Yến
             </span>
           </Link>
           
           {/* Desktop Menu */}
-          <nav className="hidden @md:block">
-            <ul className="flex space-x-8">
+          <nav style={{ display: 'none' }} className="desktop-menu">
+            <ul style={{ 
+              display: 'flex', 
+              gap: '2rem',
+              listStyleType: 'none',
+              margin: 0,
+              padding: 0
+            }}>
               {menuItems.map((item, index) => (
                 <li key={index}>
                   <Link 
                     href={item.href}
-                    className={`text-sm font-medium transition-colors duration-300 ${
-                      scrolled ? 'text-gray-800 hover:text-primary' : 'text-white hover:text-accent'
-                    }`}
+                    style={{ 
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      color: scrolled ? '#1f2937' : '#ffffff',
+                      transition: 'color 0.3s',
+                      textDecoration: 'none'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.color = scrolled ? '#4f8e62' : '#ffd700';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.color = scrolled ? '#1f2937' : '#ffffff';
+                    }}
                   >
                     {item.name}
                   </Link>
@@ -62,10 +90,18 @@ const Header: React.FC = () => {
           
           {/* Mobile Menu Button */}
           <button 
-            className="@md:hidden text-2xl"
+            style={{ 
+              display: 'block',
+              border: 'none',
+              background: 'none',
+              fontSize: '1.5rem',
+              color: scrolled ? '#4f8e62' : '#ffffff',
+              cursor: 'pointer'
+            }}
+            className="mobile-menu-button"
             onClick={() => setIsOpen(true)}
           >
-            <FaBars className={scrolled ? 'text-primary' : 'text-white'} />
+            <FaBars />
           </button>
         </div>
       </div>
@@ -77,23 +113,61 @@ const Header: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-primary z-50 flex flex-col"
+          style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: '#4f8e62',
+            zIndex: 50,
+            display: 'flex',
+            flexDirection: 'column'
+          }}
         >
-          <div className="flex justify-end p-4">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1rem' }}>
             <button 
-              className="text-white text-2xl" 
+              style={{ 
+                color: '#ffffff',
+                fontSize: '1.5rem',
+                border: 'none',
+                background: 'none',
+                cursor: 'pointer'
+              }}
               onClick={() => setIsOpen(false)}
             >
               <FaTimes />
             </button>
           </div>
           
-          <ul className="flex flex-col items-center justify-center flex-1 space-y-8">
+          <ul style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            flex: 1,
+            gap: '2rem',
+            listStyleType: 'none',
+            margin: 0,
+            padding: 0
+          }}>
             {menuItems.map((item, index) => (
               <li key={index}>
                 <Link
                   href={item.href}
-                  className="text-white text-2xl font-medium hover:text-accent transition-colors"
+                  style={{ 
+                    color: '#ffffff',
+                    fontSize: '1.5rem',
+                    fontWeight: 500,
+                    transition: 'color 0.3s',
+                    textDecoration: 'none'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.color = '#ffd700';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -103,6 +177,17 @@ const Header: React.FC = () => {
           </ul>
         </motion.div>
       )}
+
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .mobile-menu-button {
+            display: none !important;
+          }
+          .desktop-menu {
+            display: block !important;
+          }
+        }
+      `}</style>
     </header>
   );
 };

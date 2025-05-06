@@ -13,6 +13,68 @@ body {
   font-family: var(--font-montserrat);
 }
 
+/* Định nghĩa trực tiếp các font-family thay vì sử dụng class utility của Tailwind */
+.font-great-vibes {
+  font-family: var(--font-great-vibes), cursive;
+}
+
+.font-dancing {
+  font-family: var(--font-dancing-script), cursive;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+/* Định nghĩa trực tiếp các lớp kích thước text */
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+/* Các lớp màu sắc */
+.text-primary {
+  color: #4f8e62;
+}
+
+.text-white {
+  color: white;
+}
+
+/* Các lớp margin và padding */
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+/* Các class căn chỉnh text */
+.text-center {
+  text-align: center;
+}
+
 /* Animation styles */
 [data-aos] {
   opacity: 0;
@@ -61,14 +123,21 @@ body {
     padding: 0 1rem;
   }
 
-  /* Sửa cú pháp section-title với cú pháp responsive mới của Tailwind v4 */
+  /* Sửa cú pháp section-title để không sử dụng các class Tailwind */
   .section-title {
-    @apply font-great-vibes text-4xl text-primary mb-6 text-center;
+    font-family: var(--font-great-vibes), cursive;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    color: #4f8e62;
+    margin-bottom: 1.5rem;
+    text-align: center;
   }
   
-  @screen md {
+  /* Cập nhật thành CSS media query chuẩn thay vì @md */
+  @media (min-width: 768px) {
     .section-title {
-      @apply text-5xl;
+      font-size: 3rem;
+      line-height: 1;
     }
   }
 }

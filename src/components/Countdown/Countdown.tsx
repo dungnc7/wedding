@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactCountdown from 'react-countdown';
 import { motion } from 'framer-motion';
 
@@ -9,6 +9,14 @@ interface CountdownProps {
 }
 
 const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
+  // Thêm state để kiểm soát việc hiển thị countdown
+  const [isClient, setIsClient] = useState(false);
+
+  // Sử dụng useEffect để chỉ hiển thị countdown ở client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Renderer cho đồng hồ đếm ngược
   const renderer = ({ days, hours, minutes, seconds, completed }: { 
     days: number;
@@ -26,44 +34,45 @@ const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
         </div>
       );
     } else {
-      // Hiển thị đếm ngược
       return (
-        <div className="flex justify-center gap-4 @md:gap-10 text-center">
-          <motion.div 
-            className="bg-white p-4 @md:p-6 rounded-lg shadow-md w-20 @md:w-32"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl @md:text-5xl font-bold text-primary">{days}</div>
-            <div className="text-gray-600 text-sm @md:text-base mt-2">Ngày</div>
-          </motion.div>
+        <div className="text-center">
+          <h2 className="font-great-vibes text-4xl @md:text-5xl text-primary mb-8">Đếm ngược đến ngày cưới</h2>
           
-          <motion.div 
-            className="bg-white p-4 @md:p-6 rounded-lg shadow-md w-20 @md:w-32"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl @md:text-5xl font-bold text-primary">{hours}</div>
-            <div className="text-gray-600 text-sm @md:text-base mt-2">Giờ</div>
-          </motion.div>
+          <div className="flex flex-col @md:flex-row justify-center items-center gap-2 @md:gap-6 text-center">
+            <motion.div 
+              className="text-3xl @md:text-5xl font-bold text-primary"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              {days} ngày
+            </motion.div>
+            
+            <motion.div 
+              className="text-3xl @md:text-5xl font-bold text-primary"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              {hours} giờ
+            </motion.div>
+            
+            <motion.div 
+              className="text-3xl @md:text-5xl font-bold text-primary"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              {minutes} phút
+            </motion.div>
+            
+            <motion.div 
+              className="text-3xl @md:text-5xl font-bold text-primary"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              {seconds} giây
+            </motion.div>
+          </div>
           
-          <motion.div 
-            className="bg-white p-4 @md:p-6 rounded-lg shadow-md w-20 @md:w-32"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl @md:text-5xl font-bold text-primary">{minutes}</div>
-            <div className="text-gray-600 text-sm @md:text-base mt-2">Phút</div>
-          </motion.div>
-          
-          <motion.div 
-            className="bg-white p-4 @md:p-6 rounded-lg shadow-md w-20 @md:w-32"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="text-3xl @md:text-5xl font-bold text-primary">{seconds}</div>
-            <div className="text-gray-600 text-sm @md:text-base mt-2">Giây</div>
-          </motion.div>
+          <h2 className="font-great-vibes text-5xl text-primary mt-12">Sự Kiện Cưới</h2>
         </div>
       );
     }
@@ -71,14 +80,36 @@ const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
 
   return (
     <div className="py-16 bg-primary-light">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="section-title" data-aos="fade-up">Đếm ngược đến ngày cưới</h2>
-        
-        <div className="mt-8" data-aos="zoom-in">
-          <ReactCountdown
-            date={date}
-            renderer={renderer}
-          />
+      <div className="container mx-auto px-4">
+        <div data-aos="zoom-in">
+          {/* Chỉ hiển thị countdown khi ở client side */}
+          {isClient ? (
+            <ReactCountdown
+              date={date}
+              renderer={renderer}
+            />
+          ) : (
+            <div className="text-center">
+              <h2 className="font-great-vibes text-4xl @md:text-5xl text-primary mb-8">Đếm ngược đến ngày cưới</h2>
+              
+              <div className="flex flex-col @md:flex-row justify-center items-center gap-2 @md:gap-6 text-center">
+                <div className="text-3xl @md:text-5xl font-bold text-primary">
+                  -- ngày
+                </div>
+                <div className="text-3xl @md:text-5xl font-bold text-primary">
+                  -- giờ
+                </div>
+                <div className="text-3xl @md:text-5xl font-bold text-primary">
+                  -- phút
+                </div>
+                <div className="text-3xl @md:text-5xl font-bold text-primary">
+                  -- giây
+                </div>
+              </div>
+              
+              <h2 className="font-great-vibes text-5xl text-primary mt-12">Sự Kiện Cưới</h2>
+            </div>
+          )}
         </div>
       </div>
     </div>
