@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaHome, FaHeart, FaCalendarAlt, FaGift } from 'react-icons/fa';
+import { GiLovers, GiDiamondRing, GiPartyPopper, GiCakeSlice } from 'react-icons/gi';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,12 +20,28 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Danh sách menu
+  // Danh sách menu with icons - setting icon color to primary green
   const menuItems = [
-    { name: 'Trang Chủ', href: '#home' },
-    { name: 'Cô Dâu & Chú Rể', href: '#couple' },
-    { name: 'Sự Kiện', href: '#events' },
-    { name: 'Mừng Cưới', href: '#gifts' },
+    { 
+      name: 'Trang Chủ', 
+      href: '#home', 
+      icon: <FaHome className="inline-block mr-1 transition-transform duration-300" style={{ color: '#4f8e62' }} /> 
+    },
+    { 
+      name: 'Cô Dâu & Chú Rể', 
+      href: '#couple', 
+      icon: <GiLovers className="inline-block mr-1 transition-transform duration-300" style={{ color: '#4f8e62' }} /> 
+    },
+    { 
+      name: 'Sự Kiện', 
+      href: '#events', 
+      icon: <GiPartyPopper className="inline-block mr-1 transition-transform duration-300" style={{ color: '#4f8e62' }} /> 
+    },
+    { 
+      name: 'Mừng Cưới', 
+      href: '#gifts', 
+      icon: <FaGift className="inline-block mr-1 transition-transform duration-300" style={{ color: '#4f8e62' }} /> 
+    },
   ];
 
   return (
@@ -50,6 +67,20 @@ const Header: React.FC = () => {
               fontSize: '1.5rem', 
               color: scrolled ? '#4f8e62' : '#ffffff'
             }}>
+              {/* Wedding rings icon for the logo - also in primary green */}
+              <GiDiamondRing 
+                className="inline-block mr-2 transition-all duration-300" 
+                style={{ 
+                  color: scrolled ? '#4f8e62' : '#ffffff',
+                  transform: 'translateY(0)'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px) rotate(15deg)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) rotate(0deg)';
+                }}
+              />
               Tâm & Yến
             </span>
           </Link>
@@ -72,15 +103,31 @@ const Header: React.FC = () => {
                       fontWeight: 500,
                       color: scrolled ? '#1f2937' : '#ffffff',
                       transition: 'color 0.3s',
-                      textDecoration: 'none'
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.25rem'
                     }}
                     onMouseOver={(e) => {
                       e.currentTarget.style.color = scrolled ? '#4f8e62' : '#ffd700';
+                      // Make icon match text on hover and add animation
+                      const icon = e.currentTarget.querySelector('svg');
+                      if (icon) {
+                        icon.style.color = scrolled ? '#4f8e62' : '#ffd700';
+                        icon.style.transform = 'scale(1.2) translateY(-2px)';
+                      }
                     }}
                     onMouseOut={(e) => {
                       e.currentTarget.style.color = scrolled ? '#1f2937' : '#ffffff';
+                      // Reset icon color when not hovering
+                      const icon = e.currentTarget.querySelector('svg');
+                      if (icon) {
+                        icon.style.color = '#4f8e62';
+                        icon.style.transform = 'scale(1) translateY(0)';
+                      }
                     }}
                   >
+                    {item.icon}
                     {item.name}
                   </Link>
                 </li>
@@ -151,29 +198,71 @@ const Header: React.FC = () => {
             margin: 0,
             padding: 0
           }}>
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  style={{ 
-                    color: '#ffffff',
-                    fontSize: '1.5rem',
-                    fontWeight: 500,
-                    transition: 'color 0.3s',
-                    textDecoration: 'none'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = '#ffd700';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = '#ffffff';
-                  }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {menuItems.map((item, index) => {
+              // Create a version of the icon with white color for mobile menu
+              const mobileIcon = React.cloneElement(item.icon, { 
+                style: { color: '#ffffff', transition: 'all 0.3s ease' },
+                className: "inline-block transition-all duration-300"
+              });
+              
+              return (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    style={{ 
+                      color: '#ffffff',
+                      fontSize: '1.5rem',
+                      fontWeight: 500,
+                      transition: 'color 0.3s',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.color = '#ffd700';
+                      // Make mobile icon match text on hover with animation
+                      const icon = e.currentTarget.querySelector('svg');
+                      if (icon) {
+                        icon.style.color = '#ffd700';
+                        icon.style.transform = 'translateX(-4px) rotate(10deg)';
+                      }
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.color = '#ffffff';
+                      // Reset mobile icon color when not hovering
+                      const icon = e.currentTarget.querySelector('svg');
+                      if (icon) {
+                        icon.style.color = '#ffffff';
+                        icon.style.transform = 'translateX(0) rotate(0deg)';
+                      }
+                    }}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {/* Make mobile menu icons larger */}
+                    <span style={{ fontSize: '1.75rem', transition: 'transform 0.3s' }}>
+                      {mobileIcon}
+                    </span>
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
+            {/* Add cake icon at the bottom as a decorative element with animation */}
+            <motion.li 
+              style={{ marginTop: '2rem', opacity: 0.7 }}
+              animate={{ 
+                y: [0, -10, 0],
+                rotate: [0, 5, 0]
+              }}
+              transition={{ 
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "reverse" 
+              }}
+            >
+              <GiCakeSlice size={40} color="#fff" />
+            </motion.li>
           </ul>
         </motion.div>
       )}

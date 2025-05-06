@@ -31,13 +31,54 @@ const Hero: React.FC = () => {
             Nhằm ngày 28 tháng 04 năm Ất Tỵ
           </p>
           
-          <motion.button
-            className="mt-8 px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary-dark transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <a 
+            href="#couple" 
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '32px',
+              paddingLeft: '32px',
+              paddingRight: '32px',
+              paddingTop: '12px',
+              paddingBottom: '12px',
+              backgroundColor: '#4f8e62',
+              color: 'white',
+              borderRadius: '9999px',
+              fontWeight: '500',
+              textDecoration: 'none', // This removes the underline
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+              transition: 'background-color 0.3s'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#3a6b49';
+              e.currentTarget.querySelector('svg').style.transform = 'translateX(4px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#4f8e62';
+              e.currentTarget.querySelector('svg').style.transform = 'translateX(0)';
+            }}
           >
-            <a href="#couple">Xem thêm</a>
-          </motion.button>
+            <span>Xem thêm</span>
+            <svg 
+              style={{
+                width: '16px',
+                height: '16px',
+                transition: 'transform 0.3s'
+              }}
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M13 5l7 7-7 7"
+              />
+            </svg>
+          </a>
         </motion.div>
       </div>
       
