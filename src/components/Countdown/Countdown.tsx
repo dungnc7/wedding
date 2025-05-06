@@ -72,7 +72,6 @@ const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
             </motion.div>
           </div>
           
-          <h2 className="font-great-vibes text-5xl text-primary mt-12">Sự Kiện Cưới</h2>
         </div>
       );
     }
@@ -107,7 +106,6 @@ const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
                 </div>
               </div>
               
-              <h2 className="font-great-vibes text-5xl text-primary mt-12">Sự Kiện Cưới</h2>
             </div>
           )}
         </div>

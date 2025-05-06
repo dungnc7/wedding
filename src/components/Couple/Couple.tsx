@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import customLoader from '@/app/image-loader';
 
 interface PersonProps {
   name: string;
@@ -22,12 +23,17 @@ const Person: React.FC<PersonProps> = ({ name, role, parents, address, image, an
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
     >
-      <div className="relative w-64 h-64 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary-light">
+      <div className="relative w-64 h-64 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary-light" style={{ width: '16rem', height: '16rem' }}>
         <Image 
+          loader={customLoader}
           src={image} 
           alt={name} 
-          fill 
+          width={256}
+          height={256}
           style={{ objectFit: 'cover' }}
+          priority={true}
+          unoptimized={true}
+          className="rounded-full"
         />
       </div>
       <h3 className="font-dancing text-3xl text-primary mb-2">{name}</h3>

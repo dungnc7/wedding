@@ -7,6 +7,17 @@
   --foreground: #171717;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Next.js Image component fix */
+span[style*="box-sizing: border-box; display: block; overflow: hidden;"] img {
+  height: 100% !important;
+  position: relative !important;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

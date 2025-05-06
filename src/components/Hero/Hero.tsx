@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import customLoader from '@/app/image-loader';
 
 const Hero: React.FC = () => {
   return (
@@ -52,9 +54,18 @@ const Hero: React.FC = () => {
           repeatType: "reverse" 
         }}
       >
-        <div className="w-full h-full opacity-30"
-          style={{ backgroundImage: 'url(/images/flower-1.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}
-        ></div>
+        <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
+          <Image 
+            loader={customLoader}
+            src="/images/flower-1.png"
+            alt="Flower decoration"
+            width={256}
+            height={256}
+            className="opacity-30"
+            priority={true}
+            unoptimized={true}
+          />
+        </div>
       </motion.div>
       
       <motion.div
@@ -69,9 +80,18 @@ const Hero: React.FC = () => {
           repeatType: "reverse" 
         }}
       >
-        <div className="w-full h-full opacity-30"
-          style={{ backgroundImage: 'url(/images/flower-2.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}
-        ></div>
+        <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
+          <Image 
+            loader={customLoader}
+            src="/images/flower-2.png"
+            alt="Flower decoration"
+            width={256}
+            height={256}
+            className="opacity-30"
+            priority={true}
+            unoptimized={true}
+          />
+        </div>
       </motion.div>
     </section>
   );
