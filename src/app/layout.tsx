@@ -4,6 +4,7 @@ import { Dancing_Script } from "next/font/google";
 import { Great_Vibes } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/Background";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const montserrat = Montserrat({
   subsets: ["vietnamese", "latin"],
@@ -42,8 +43,10 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${dancingScript.variable} ${greatVibes.variable} antialiased`}
       >
-        <Background type="hearts" />
-        {children}
+        <ThemeProvider>
+          <Background type="hearts" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,89 +1,56 @@
 'use client';
 
-import React from 'react';
-import { QRCodeCanvas } from 'qrcode.react';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-interface BankAccountProps {
+interface AccountInfo {
   name: string;
   bank: string;
   accountNumber: string;
-  qrValue: string;
-  role: 'bride' | 'groom';
+  qrValue?: string;
 }
 
-const BankAccount: React.FC<BankAccountProps> = ({ name, bank, accountNumber, qrValue, role }) => {
-  return (
-    <motion.div 
-      className="bg-white p-6 rounded-lg shadow-md"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <h3 className="font-dancing text-2xl text-primary mb-4">
-        {role === 'bride' ? 'Cô dâu' : 'Chú rể'}
-      </h3>
-      <div className="flex justify-center mb-4">
-        <QRCodeCanvas 
-          value={qrValue} 
-          size={200}
-          bgColor="#FFFFFF"
-          fgColor="#4f8e62"
-          level="H"
-          includeMargin={true}
-        />
-      </div>
-      <div className="mt-4">
-        <p className="font-semibold">{name}</p>
-        <p className="text-gray-600">{bank} - {accountNumber}</p>
-      </div>
-    </motion.div>
-  );
-};
-
-interface QRCodeSectionProps {
-  brideAccount: {
-    name: string;
-    bank: string;
-    accountNumber: string;
-    qrValue: string;
-  };
-  groomAccount: {
-    name: string;
-    bank: string;
-    accountNumber: string;
-    qrValue: string;
-  };
+interface QRCodeProps {
+  groomAccount: AccountInfo;
+  brideAccount: AccountInfo;
 }
 
-const QRCodeSection: React.FC<QRCodeSectionProps> = ({ brideAccount, groomAccount }) => {
+const QRCodeSection = ({ groomAccount, brideAccount }: QRCodeProps) => {
   return (
-    <section id="gifts" className="py-16 bg-primary-light">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="section-title" data-aos="fade-up">Mừng Cưới</h2>
+    <section id="qrcode" className="section bg-gray">
+      <div className="container">
+        <h2 className="section-title" data-aos="fade-up">Mừng cưới</h2>
+        <p className="section-subtitle" data-aos="fade-up">Nếu bạn muốn gửi lời chúc mừng đến cô dâu và chú rể</p>
         
-        <p className="mb-8 max-w-2xl mx-auto" data-aos="fade-up">
-          Sự hiện diện của quý vị là niềm vinh hạnh cho gia đình chúng tôi.
-          Nếu không thể đến tham dự, quý vị có thể gửi lời chúc mừng qua:
-        </p>
-        
-        <div className="grid @md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <BankAccount 
-            name={groomAccount.name} 
-            bank={groomAccount.bank} 
-            accountNumber={groomAccount.accountNumber} 
-            qrValue={groomAccount.qrValue}
-            role="groom"
-          />
+        <div className="qrcode-container">
+          <div className="qrcode-card" data-aos="fade-right" data-aos-duration="1000">
+            <div className="qrcode-title">Chú rể</div>
+            <div className="qrcode-name">{groomAccount.name}</div>
+            <div className="qrcode-bank">{groomAccount.bank}</div>
+            <div className="qrcode-account">{groomAccount.accountNumber}</div>
+            <div className="qrcode-image">
+              <Image 
+                src={groomAccount.qrValue || "/images/qr-groom.png"}
+                alt="QR Code chú rể"
+                width={200}
+                height={200}
+              />
+            </div>
+          </div>
           
-          <BankAccount 
-            name={brideAccount.name} 
-            bank={brideAccount.bank} 
-            accountNumber={brideAccount.accountNumber} 
-            qrValue={brideAccount.qrValue}
-            role="bride"
-          />
+          <div className="qrcode-card" data-aos="fade-left" data-aos-duration="1000">
+            <div className="qrcode-title">Cô dâu</div>
+            <div className="qrcode-name">{brideAccount.name}</div>
+            <div className="qrcode-bank">{brideAccount.bank}</div>
+            <div className="qrcode-account">{brideAccount.accountNumber}</div>
+            <div className="qrcode-image">
+              <Image 
+                src={brideAccount.qrValue || "/images/qr-bride.png"}
+                alt="QR Code cô dâu"
+                width={200}
+                height={200}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

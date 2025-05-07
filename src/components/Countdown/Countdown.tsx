@@ -1,116 +1,73 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import ReactCountdown from 'react-countdown';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 interface CountdownProps {
   date: Date;
 }
 
-const WeddingCountdown: React.FC<CountdownProps> = ({ date }) => {
-  // Thêm state để kiểm soát việc hiển thị countdown
-  const [isClient, setIsClient] = useState(false);
+const WeddingCountdown = ({ date }: CountdownProps) => {
+  const [days, setDays] = useState<number>(0);
+  const [hours, setHours] = useState<number>(0);
+  const [minutes, setMinutes] = useState<number>(0);
+  const [seconds, setSeconds] = useState<number>(0);
 
-  // Sử dụng useEffect để chỉ hiển thị countdown ở client side
   useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Renderer cho đồng hồ đếm ngược
-  const renderer = ({ days, hours, minutes, seconds, completed }: { 
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-    completed: boolean;
-  }) => {
-    if (completed) {
-      // Hiển thị khi đã đến ngày cưới
-      return (
-        <div className="text-center py-8">
-          <h3 className="text-3xl font-dancing text-primary">Hôm nay là ngày cưới!</h3>
-          <p className="text-xl mt-4">Cảm ơn quý vị đã đến chung vui cùng chúng tôi!</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="text-center">
-          <h2 className="font-great-vibes text-4xl @md:text-5xl text-primary mb-8">Đếm ngược đến ngày cưới</h2>
-          
-          <div className="flex flex-col @md:flex-row justify-center items-center gap-2 @md:gap-6 text-center">
-            <motion.div 
-              className="text-3xl @md:text-5xl font-bold text-primary"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              {days} ngày
-            </motion.div>
-            
-            <motion.div 
-              className="text-3xl @md:text-5xl font-bold text-primary"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              {hours} giờ
-            </motion.div>
-            
-            <motion.div 
-              className="text-3xl @md:text-5xl font-bold text-primary"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              {minutes} phút
-            </motion.div>
-            
-            <motion.div 
-              className="text-3xl @md:text-5xl font-bold text-primary"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              {seconds} giây
-            </motion.div>
-          </div>
-          
-        </div>
-      );
-    }
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const weddingDate = date.getTime();
+      const distance = weddingDate - now;
+      
+      if (distance > 0) {
+        setDays(Math.floor(distance / (1000 * 60 * 60 * 24)));
+        setHours(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+        setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
+      }
+    };
+    
+    // Cập nhật ngay lập tức
+    updateCountdown();
+    
+    // Thiết lập interval để cập nhật mỗi giây
+    const interval = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(interval);
+  }, [date]);
+  
+  const formatNumber = (num: number): string => {
+    return num.toString().padStart(2, '0');
   };
 
   return (
-    <div className="py-16 bg-primary-light">
-      <div className="container mx-auto px-4">
-        <div data-aos="zoom-in">
-          {/* Chỉ hiển thị countdown khi ở client side */}
-          {isClient ? (
-            <ReactCountdown
-              date={date}
-              renderer={renderer}
-            />
-          ) : (
-            <div className="text-center">
-              <h2 className="font-great-vibes text-4xl @md:text-5xl text-primary mb-8">Đếm ngược đến ngày cưới</h2>
-              
-              <div className="flex flex-col @md:flex-row justify-center items-center gap-2 @md:gap-6 text-center">
-                <div className="text-3xl @md:text-5xl font-bold text-primary">
-                  -- ngày
-                </div>
-                <div className="text-3xl @md:text-5xl font-bold text-primary">
-                  -- giờ
-                </div>
-                <div className="text-3xl @md:text-5xl font-bold text-primary">
-                  -- phút
-                </div>
-                <div className="text-3xl @md:text-5xl font-bold text-primary">
-                  -- giây
-                </div>
-              </div>
-              
-            </div>
-          )}
+    <section id="countdown" className="section text-white text-center" style={{
+      backgroundImage: 'linear-gradient(rgba(79, 142, 98, 0.8), rgba(79, 142, 98, 0.8)), url("/images/groom-bride.png")',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
+      <div className="container">
+        <h2 className="section-title text-white" data-aos="fade-up">Đếm ngược đến ngày vui</h2>
+        
+        <div className="countdown-container" data-aos="fade-up">
+          <div className="countdown-box">
+            <div className="countdown-number">{formatNumber(days)}</div>
+            <div className="countdown-label">Ngày</div>
+          </div>
+          <div className="countdown-box">
+            <div className="countdown-number">{formatNumber(hours)}</div>
+            <div className="countdown-label">Giờ</div>
+          </div>
+          <div className="countdown-box">
+            <div className="countdown-number">{formatNumber(minutes)}</div>
+            <div className="countdown-label">Phút</div>
+          </div>
+          <div className="countdown-box">
+            <div className="countdown-number">{formatNumber(seconds)}</div>
+            <div className="countdown-label">Giây</div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

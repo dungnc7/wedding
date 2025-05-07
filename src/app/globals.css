@@ -1,154 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #4f8e62;
+  --primary-light: #e1f5e6;
+  --primary-dark: #3a6b49;
+  --accent: #ff9d9d;
+  --text: #333333;
+  --light: #ffffff;
+  --gray: #f8f8f8;
+  --dark-gray: #666666;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* Theme variations */
+.theme-modern {
+  --primary: #2d3047;
+  --primary-light: #e9e9f0;
+  --primary-dark: #1a1c2a;
+  --accent: #ffb703;
+  --text: #222222;
 }
 
-/* Next.js Image component fix */
-span[style*="box-sizing: border-box; display: block; overflow: hidden;"] img {
-  height: 100% !important;
-  position: relative !important;
+.theme-rustic {
+  --primary: #8a6642;
+  --primary-light: #f1e8dd;
+  --primary-dark: #63492f;
+  --accent: #a4ac86;
+  --text: #3a332b;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-montserrat);
+.theme-minimalist {
+  --primary: #484848;
+  --primary-light: #f0f0f0;
+  --primary-dark: #2c2c2c;
+  --accent: #d4d4d4;
+  --text: #222222;
 }
 
-/* Định nghĩa trực tiếp các font-family thay vì sử dụng class utility của Tailwind */
-.font-great-vibes {
-  font-family: var(--font-great-vibes), cursive;
+.theme-classic {
+  --primary: #4f8e62;
+  --primary-light: #e1f5e6;
+  --primary-dark: #3a6b49;
+  --accent: #ff9d9d;
+  --text: #333333;
 }
 
-.font-dancing {
-  font-family: var(--font-dancing-script), cursive;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.font-montserrat {
-  font-family: var(--font-montserrat), sans-serif;
-}
-
-/* Định nghĩa trực tiếp các lớp kích thước text */
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-/* Các lớp màu sắc */
-.text-primary {
-  color: #4f8e62;
-}
-
-.text-white {
-  color: white;
-}
-
-/* Các lớp margin và padding */
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-/* Các class căn chỉnh text */
-.text-center {
-  text-align: center;
-}
-
-/* Animation styles */
-[data-aos] {
-  opacity: 0;
-  transition-property: opacity, transform;
-  transition-duration: 800ms;
-}
-
-[data-aos].aos-animate {
-  opacity: 1;
-}
-
-[data-aos="fade-up"] {
-  transform: translateY(20px);
-}
-
-[data-aos="fade-up"].aos-animate {
-  transform: translateY(0);
-}
-
-[data-aos="fade-down"] {
-  transform: translateY(-20px);
-}
-
-[data-aos="fade-down"].aos-animate {
-  transform: translateY(0);
-}
-
-[data-aos="zoom-in"] {
-  transform: scale(0.9);
-}
-
-[data-aos="zoom-in"].aos-animate {
-  transform: scale(1);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+  }
 }
 
 @layer components {
-  .wedding-bg {
-    background: linear-gradient(to bottom, #e1f5e6, #ffffff);
-    background-size: cover;
-    background-position: center;
-  }
-  
   .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-
-  /* Sửa cú pháp section-title để không sử dụng các class Tailwind */
-  .section-title {
-    font-family: var(--font-great-vibes), cursive;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    color: #4f8e62;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    @apply w-full mx-auto px-4;
+    max-width: 80rem; /* 80rem = 1280px, equivalent to max-w-7xl in Tailwind v3 */
   }
   
-  /* Cập nhật thành CSS media query chuẩn thay vì @md */
-  @media (min-width: 768px) {
-    .section-title {
-      font-size: 3rem;
-      line-height: 1;
+  .section {
+    @apply py-24 md:py-32;
+  }
+  
+  .section-title {
+    @apply font-['Great_Vibes'] text-4xl md:text-5xl text-[var(--primary)] text-center mb-12;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-[var(--dark-gray)] text-center mb-10;
+  }
+  
+  /* Hero Section */
+  .hero-names {
+    @apply font-['Great_Vibes'] text-5xl md:text-7xl lg:text-8xl text-[var(--primary)] mb-5;
+  }
+  
+  .hero-intro {
+    @apply text-xl md:text-2xl mb-4;
+  }
+  
+  .hero-invite {
+    @apply text-xl md:text-2xl mb-8;
+  }
+  
+  .hero-date {
+    @apply text-2xl md:text-3xl mt-8;
+  }
+  
+  .hero-lunar {
+    @apply text-[var(--dark-gray)] mt-3;
+  }
+  
+  .hero-btn {
+    @apply inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[var(--primary)] text-white rounded-full font-medium shadow-md transition-all duration-300;
+  }
+  
+  .hero-btn:hover {
+    @apply bg-[var(--primary-dark)] transform -translate-y-1 shadow-lg;
+  }
+  
+  /* Couple Section */
+  .person {
+    @apply text-center;
+  }
+  
+  .person-image-container {
+    @apply w-[250px] h-[250px] mx-auto mb-8 rounded-full border-4 border-[var(--primary-light)] overflow-hidden;
+  }
+  
+  .person-image {
+    @apply w-full h-full object-cover;
+  }
+  
+  .person-name {
+    @apply font-['Dancing_Script'] text-3xl text-[var(--primary)] mb-2;
+  }
+  
+  /* Events Section */
+  .event-card {
+    @apply bg-white rounded-lg shadow-lg p-8 mb-8;
+  }
+  
+  .event-icon {
+    @apply w-20 h-20 bg-[var(--primary-light)] rounded-full flex items-center justify-center mx-auto mb-5 text-3xl text-[var(--primary)];
+  }
+  
+  .event-title {
+    @apply text-2xl text-center mb-3;
+  }
+  
+  .event-details {
+    @apply text-center mb-5;
+  }
+  
+  /* Gallery Section */
+  .gallery-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+  }
+  
+  .gallery-item {
+    @apply rounded-lg overflow-hidden h-[250px] shadow-md;
+  }
+  
+  .gallery-image {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+  
+  .gallery-item:hover .gallery-image {
+    @apply transform scale-105;
+  }
+  
+  /* QRCode Section */
+  .qrcode-container {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+  }
+  
+  .qrcode-card {
+    @apply bg-white rounded-lg shadow-lg p-8 text-center;
+  }
+  
+  .qrcode-title {
+    @apply text-lg text-[var(--dark-gray)] mb-2;
+  }
+  
+  .qrcode-name {
+    @apply text-2xl font-['Dancing_Script'] text-[var(--primary)] mb-3;
+  }
+  
+  .qrcode-bank {
+    @apply font-medium mb-1;
+  }
+  
+  .qrcode-account {
+    @apply text-lg font-semibold mb-5;
+  }
+  
+  .qrcode-image {
+    @apply w-[200px] mx-auto;
+  }
+  
+  /* Countdown Section */
+  .countdown-container {
+    @apply flex justify-center flex-wrap gap-5 lg:gap-8;
+  }
+  
+  .countdown-box {
+    @apply w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-white/20 backdrop-blur-md rounded-lg flex flex-col items-center justify-center;
+  }
+  
+  .countdown-number {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold leading-none;
+  }
+  
+  .countdown-label {
+    @apply mt-2 text-sm uppercase;
+  }
+  
+  /* Map Section */
+  .map-container {
+    @apply mt-8 rounded-lg overflow-hidden shadow-lg h-[400px] w-full;
+  }
+  
+  /* Hearts animation */
+  @keyframes float {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
     }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-800px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  .heart {
+    @apply absolute w-8 h-8 opacity-0;
+    animation: float 6s ease-in-out infinite;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }

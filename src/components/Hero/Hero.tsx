@@ -1,146 +1,119 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import customLoader from '@/app/image-loader';
-import { withBasePath } from '@/utils/basePath';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { FaArrowRight } from 'react-icons/fa';
+import { useTheme } from '../../contexts/ThemeContext';
 
-const Hero: React.FC = () => {
+const Hero = () => {
+  const { theme } = useTheme();
+  
+  // Function để tạo hiệu ứng trái tim bay
+  useEffect(() => {
+    const createHeart = () => {
+      const heartContainer = document.getElementById('heartsContainer');
+      if (!heartContainer) return;
+
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+
+      // Vị trí ngẫu nhiên
+      heart.style.left = `${Math.random() * 100}%`;
+
+      // Thời gian animation ngẫu nhiên
+      const duration = Math.random() * 3 + 4; // 4-7s
+      heart.style.animationDuration = `${duration}s`;
+
+      // Kích thước ngẫu nhiên
+      const size = Math.random() * 20 + 20; // 20-40px
+      heart.style.width = `${size}px`;
+      heart.style.height = `${size}px`;
+      heart.style.backgroundImage = `url('/images/heart.svg')`;
+
+      heartContainer.appendChild(heart);
+
+      // Xóa heart sau khi animation kết thúc
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    };
+
+    // Tạo hearts định kỳ
+    const heartInterval = setInterval(createHeart, 1000);
+
+    // Tạo hearts ban đầu
+    for (let i = 0; i < 10; i++) {
+      setTimeout(createHeart, i * 300);
+    }
+
+    return () => {
+      clearInterval(heartInterval);
+    };
+  }, []);
+
+  const themeStyles = {
+    modern: {
+      section: "min-h-screen bg-gradient-to-b from-slate-100 to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
+      intro: "text-lg font-light tracking-wide mb-2 text-gray-600",
+      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-slate-800",
+      invite: "text-xl font-light tracking-widest mb-4 text-gray-600",
+      divider: "w-20 h-px bg-slate-400 mx-auto mb-4",
+      date: "text-2xl font-medium mb-1 text-slate-700",
+      lunar: "text-md mb-8 text-gray-500",
+      button: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-slate-800 text-white hover:bg-slate-700 transition-colors duration-300 group"
+    },
+    rustic: {
+      section: "min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
+      intro: "text-lg font-light tracking-wide mb-2 text-amber-800",
+      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-amber-900",
+      invite: "text-xl font-light tracking-widest mb-4 text-amber-700",
+      divider: "w-20 h-px bg-amber-400 mx-auto mb-4",
+      date: "text-2xl font-medium mb-1 text-amber-800",
+      lunar: "text-md mb-8 text-amber-600",
+      button: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-amber-700 text-white hover:bg-amber-600 transition-colors duration-300 group"
+    },
+    minimalist: {
+      section: "min-h-screen bg-white flex items-center justify-center text-center relative overflow-hidden pt-20",
+      intro: "text-lg font-light tracking-wide mb-2 text-gray-500",
+      names: "text-5xl md:text-7xl font-sans font-bold mb-2 text-gray-800",
+      invite: "text-xl font-light tracking-widest mb-4 text-gray-500",
+      divider: "w-20 h-px bg-gray-300 mx-auto mb-4",
+      date: "text-2xl font-medium mb-1 text-gray-700",
+      lunar: "text-md mb-8 text-gray-400",
+      button: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 group"
+    },
+    classic: {
+      section: "min-h-screen bg-gradient-to-b from-primary-light to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
+      intro: "text-lg font-light tracking-wide mb-2 text-primary-dark",
+      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-primary",
+      invite: "text-xl font-light tracking-widest mb-4 text-primary-dark",
+      divider: "w-20 h-px bg-accent mx-auto mb-4",
+      date: "text-2xl font-medium mb-1 text-primary-dark",
+      lunar: "text-md mb-8 text-primary-dark/80",
+      button: "inline-flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-white hover:bg-primary-dark transition-colors duration-300 group"
+    }
+  };
+
+  const styles = themeStyles[theme];
+
   return (
-    <section 
-      id="home" 
-      className="relative h-screen flex items-center justify-center bg-gradient-to-b from-primary-light to-white overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-primary/10"></div>
-      <div className="container mx-auto px-4 z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-xl mb-3 text-gray-800 @md:text-2xl">Trân trọng kính mời</h3>
-          <h1 className="font-great-vibes text-5xl text-primary mb-4 @md:text-7xl">Tâm & Yến</h1>
-          <p className="text-lg mb-6 @md:text-xl">Wedding Invitation</p>
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-1 bg-accent"></div>
-          </div>
-          <h2 className="text-2xl @md:text-3xl">
-            Chủ Nhật, 25/05/2025
-          </h2>
-          <p className="mt-2 text-gray-600">
-            Nhằm ngày 28 tháng 04 năm Ất Tỵ
-          </p>
-          
-          <a 
-            href="#couple" 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              marginTop: '32px',
-              paddingLeft: '32px',
-              paddingRight: '32px',
-              paddingTop: '12px',
-              paddingBottom: '12px',
-              backgroundColor: '#4f8e62',
-              color: 'white',
-              borderRadius: '9999px',
-              fontWeight: '500',
-              textDecoration: 'none', // This removes the underline
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-              transition: 'background-color 0.3s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#3a6b49';
-              const svg = e.currentTarget.querySelector('svg');
-              if (svg) {
-                svg.style.transform = 'translateX(4px)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#4f8e62';
-              const svg = e.currentTarget.querySelector('svg');
-              if (svg) {
-                svg.style.transform = 'translateX(0)';
-              }
-            }}
-          >
+    <section id="hero" className={styles.section}>
+      <div id="heartsContainer" className="absolute inset-0 pointer-events-none z-0"></div>
+
+      <div className="container z-10 py-10">
+        <div data-aos="fade-down" data-aos-duration="1000">
+          <p className={styles.intro}>Trân trọng kính mời</p>
+          <h1 className={styles.names}>Tâm & Yến</h1>
+          <p className={styles.invite}>Wedding Invitation</p>
+          <div className={styles.divider}></div>
+          <h2 className={styles.date}>Chủ Nhật, 25/05/2025</h2>
+          <p className={styles.lunar}>Nhằm ngày 28 tháng 04 năm Ất Tỵ</p>
+          <Link href="#couple" className={styles.button}>
             <span>Xem thêm</span>
-            <svg 
-              style={{
-                width: '16px',
-                height: '16px',
-                transition: 'transform 0.3s'
-              }}
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M13 5l7 7-7 7"
-              />
-            </svg>
-          </a>
-        </motion.div>
+            <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
-      
-      {/* Các hình ảnh trang trí */}
-      <motion.div
-        className="absolute -bottom-8 -left-16 w-32 h-32 @md:w-64 @md:h-64"
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 5, 0] 
-        }}
-        transition={{ 
-          duration: 6,
-          repeat: Infinity,
-          repeatType: "reverse" 
-        }}
-      >
-        <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
-          <Image 
-            loader={customLoader}
-            src={withBasePath("images/flower-1.png")}
-            alt="Flower decoration"
-            width={256}
-            height={256}
-            className="opacity-30"
-            priority={true}
-            unoptimized={true}
-          />
-        </div>
-      </motion.div>
-      
-      <motion.div
-        className="absolute -top-10 -right-16 w-32 h-32 @md:w-64 @md:h-64"
-        animate={{ 
-          y: [0, -15, 0],
-          rotate: [0, -5, 0] 
-        }}
-        transition={{ 
-          duration: 7,
-          repeat: Infinity,
-          repeatType: "reverse" 
-        }}
-      >
-        <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
-          <Image 
-            loader={customLoader}
-            src={withBasePath("images/flower-2.png")}
-            alt="Flower decoration"
-            width={256}
-            height={256}
-            className="opacity-30"
-            priority={true}
-            unoptimized={true}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 };
