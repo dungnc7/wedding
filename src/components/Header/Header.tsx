@@ -88,15 +88,6 @@ const Header = () => {
             </li>
             <li>
               <Link 
-                href="#rsvp" 
-                onClick={closeMenu}
-                className="md:ml-8 text-base font-medium text-textColor hover:text-primary transition-colors"
-              >
-                RSVP
-              </Link>
-            </li>
-            <li>
-              <Link 
                 href="#qrcode" 
                 onClick={closeMenu}
                 className="md:ml-8 text-base font-medium text-textColor hover:text-primary transition-colors"
