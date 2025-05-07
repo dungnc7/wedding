@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaBars, FaTimes, FaHome, FaHeart, FaCalendarAlt, FaGift } from 'react-icons/fa';
+import { FaBars, FaTimes, FaHome, FaGift } from 'react-icons/fa';
 import { GiLovers, GiDiamondRing, GiPartyPopper, GiCakeSlice } from 'react-icons/gi';
 
 const Header: React.FC = () => {

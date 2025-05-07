@@ -8,7 +8,6 @@ import WeddingCountdown from "@/components/Countdown/Countdown";
 import Events from "@/components/Events/Events";
 import QRCodeSection from "@/components/QRCode/QRCode";
 import AOS from "aos";
-import styles from "./test.module.css";
 
 export default function Home() {
   useEffect(() => {

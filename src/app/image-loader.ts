@@ -1,6 +1,7 @@
 import { ImageLoaderProps } from 'next/image';
 
 export default function customLoader({ src, width, quality }: ImageLoaderProps): string {
+  // width và quality không sử dụng nhưng cần khai báo để match interface ImageLoaderProps
   // Nếu src đã là URL đầy đủ, trả về nguyên vẹn
   if (src.startsWith('http')) {
     return src;

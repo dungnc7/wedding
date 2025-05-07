@@ -21,7 +21,8 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
+  const particlesLoaded = useCallback(async (_container: Container | undefined) => {
+    // Đổi tên tham số thành _container để ESLint hiểu rằng chúng ta biết nó không được sử dụng
     // Có thể thực hiện các hành động khi particles đã được tải xong
   }, []);
 
