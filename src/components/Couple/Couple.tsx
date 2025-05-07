@@ -14,7 +14,7 @@ const Couple = () => {
       personContainer: "text-center p-6",
       imageContainer: "relative mx-auto mb-6 overflow-hidden rounded-full w-64 h-64 border-4 border-slate-200 shadow-lg",
       image: "object-cover object-center w-full h-full transition-transform duration-500 hover:scale-110",
-      name: "text-2xl font-serif font-bold mb-2 text-slate-800",
+      name: "font-['Great_Vibes'] text-3xl md:text-4xl mb-2 text-slate-800 drop-shadow-md",
       role: "text-slate-600 text-lg mb-4",
       familyTitle: "text-slate-500 text-sm",
       familyName: "font-medium mb-4 text-slate-700",
@@ -27,7 +27,7 @@ const Couple = () => {
       personContainer: "text-center p-6",
       imageContainer: "relative mx-auto mb-6 overflow-hidden rounded-full w-64 h-64 border-4 border-amber-200 shadow-lg",
       image: "object-cover object-center w-full h-full transition-transform duration-500 hover:scale-110",
-      name: "text-2xl font-serif font-bold mb-2 text-amber-900",
+      name: "font-['Dancing_Script'] text-3xl md:text-4xl font-bold mb-2 text-amber-900 drop-shadow-md",
       role: "text-amber-700 text-lg mb-4",
       familyTitle: "text-amber-600 text-sm",
       familyName: "font-medium mb-4 text-amber-800",
@@ -40,7 +40,7 @@ const Couple = () => {
       personContainer: "text-center p-6",
       imageContainer: "relative mx-auto mb-6 overflow-hidden rounded-full w-64 h-64 border-4 border-gray-100 shadow-md",
       image: "object-cover object-center w-full h-full transition-transform duration-500 hover:scale-110",
-      name: "text-2xl font-sans font-bold mb-2 text-gray-800",
+      name: "font-['Great_Vibes'] text-3xl md:text-4xl mb-2 text-gray-800 drop-shadow-sm",
       role: "text-gray-600 text-lg mb-4",
       familyTitle: "text-gray-500 text-sm",
       familyName: "font-medium mb-4 text-gray-700",
@@ -53,7 +53,7 @@ const Couple = () => {
       personContainer: "text-center p-6",
       imageContainer: "relative mx-auto mb-6 overflow-hidden rounded-full w-64 h-64 border-4 border-primary-light shadow-lg",
       image: "object-cover object-center w-full h-full transition-transform duration-500 hover:scale-110",
-      name: "text-2xl font-serif font-bold mb-2 text-primary",
+      name: "font-['Dancing_Script'] text-3xl md:text-4xl font-bold mb-2 text-primary drop-shadow-md",
       role: "text-primary-dark text-lg mb-4",
       familyTitle: "text-primary-dark/70 text-sm",
       familyName: "font-medium mb-4 text-primary-dark",
@@ -67,7 +67,7 @@ const Couple = () => {
   return (
     <section id="couple" className={styles.section}>
       <div className="container mx-auto px-4">
-        <h2 className={styles.title} data-aos="fade-up">Cô dâu & Chú rể</h2>
+        <h2 className="section-title" data-aos="fade-up">Cô dâu & Chú rể</h2>
         
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="md:w-5/12" data-aos="fade-right" data-aos-duration="1000">

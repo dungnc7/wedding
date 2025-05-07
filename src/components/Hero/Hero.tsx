@@ -55,7 +55,8 @@ const Hero = () => {
     modern: {
       section: "min-h-screen bg-gradient-to-b from-slate-100 to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
       intro: "text-lg font-light tracking-wide mb-2 text-gray-600",
-      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-slate-800",
+      names: "font-['Great_Vibes'] text-5xl md:text-7xl lg:text-8xl mb-2 text-slate-800 relative drop-shadow-lg text-shadow-wedding",
+      namesWrapper: "relative inline-block before:content-[''] before:absolute before:-bottom-2 before:left-1/4 before:w-1/2 before:h-1 before:bg-slate-400",
       invite: "text-xl font-light tracking-widest mb-4 text-gray-600",
       divider: "w-20 h-px bg-slate-400 mx-auto mb-4",
       date: "text-2xl font-medium mb-1 text-slate-700",
@@ -65,7 +66,8 @@ const Hero = () => {
     rustic: {
       section: "min-h-screen bg-gradient-to-b from-amber-50 to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
       intro: "text-lg font-light tracking-wide mb-2 text-amber-800",
-      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-amber-900",
+      names: "font-['Dancing_Script'] text-5xl md:text-7xl lg:text-8xl font-bold mb-2 text-amber-900 relative drop-shadow-lg text-shadow-wedding",
+      namesWrapper: "relative inline-block before:content-[''] before:absolute before:-bottom-2 before:left-1/4 before:w-1/2 before:h-1 before:bg-amber-400",
       invite: "text-xl font-light tracking-widest mb-4 text-amber-700",
       divider: "w-20 h-px bg-amber-400 mx-auto mb-4",
       date: "text-2xl font-medium mb-1 text-amber-800",
@@ -75,7 +77,8 @@ const Hero = () => {
     minimalist: {
       section: "min-h-screen bg-white flex items-center justify-center text-center relative overflow-hidden pt-20",
       intro: "text-lg font-light tracking-wide mb-2 text-gray-500",
-      names: "text-5xl md:text-7xl font-sans font-bold mb-2 text-gray-800",
+      names: "font-['Great_Vibes'] text-5xl md:text-7xl lg:text-8xl mb-2 text-gray-800 relative drop-shadow-md text-shadow-wedding",
+      namesWrapper: "relative inline-block before:content-[''] before:absolute before:-bottom-2 before:left-1/4 before:w-1/2 before:h-0.5 before:bg-gray-300",
       invite: "text-xl font-light tracking-widest mb-4 text-gray-500",
       divider: "w-20 h-px bg-gray-300 mx-auto mb-4",
       date: "text-2xl font-medium mb-1 text-gray-700",
@@ -85,7 +88,8 @@ const Hero = () => {
     classic: {
       section: "min-h-screen bg-gradient-to-b from-primary-light to-white flex items-center justify-center text-center relative overflow-hidden pt-20",
       intro: "text-lg font-light tracking-wide mb-2 text-primary-dark",
-      names: "text-5xl md:text-7xl font-serif font-bold mb-2 text-primary",
+      names: "font-['Dancing_Script'] text-5xl md:text-7xl lg:text-8xl font-bold mb-2 text-primary relative drop-shadow-lg text-shadow-wedding",
+      namesWrapper: "relative inline-block before:content-[''] before:absolute before:-bottom-2 before:left-1/4 before:w-1/2 before:h-1 before:bg-accent",
       invite: "text-xl font-light tracking-widest mb-4 text-primary-dark",
       divider: "w-20 h-px bg-accent mx-auto mb-4",
       date: "text-2xl font-medium mb-1 text-primary-dark",
@@ -103,7 +107,9 @@ const Hero = () => {
       <div className="container z-10 py-10">
         <div data-aos="fade-down" data-aos-duration="1000">
           <p className={styles.intro}>Trân trọng kính mời</p>
-          <h1 className={styles.names}>Tâm & Yến</h1>
+          <div className={styles.namesWrapper}>
+            <h1 className={styles.names}>Tâm & Yến</h1>
+          </div>
           <p className={styles.invite}>Wedding Invitation</p>
           <div className={styles.divider}></div>
           <h2 className={styles.date}>Chủ Nhật, 25/05/2025</h2>
