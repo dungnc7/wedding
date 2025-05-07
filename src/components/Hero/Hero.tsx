@@ -52,11 +52,17 @@ const Hero: React.FC = () => {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#3a6b49';
-              e.currentTarget.querySelector('svg').style.transform = 'translateX(4px)';
+              const svg = e.currentTarget.querySelector('svg');
+              if (svg) {
+                svg.style.transform = 'translateX(4px)';
+              }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = '#4f8e62';
-              e.currentTarget.querySelector('svg').style.transform = 'translateX(0)';
+              const svg = e.currentTarget.querySelector('svg');
+              if (svg) {
+                svg.style.transform = 'translateX(0)';
+              }
             }}
           >
             <span>Xem thêm</span>
@@ -98,7 +104,7 @@ const Hero: React.FC = () => {
         <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
           <Image 
             loader={customLoader}
-            src="/images/flower-1.png"
+            src="./images/flower-1.png"
             alt="Flower decoration"
             width={256}
             height={256}
@@ -124,7 +130,7 @@ const Hero: React.FC = () => {
         <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
           <Image 
             loader={customLoader}
-            src="/images/flower-2.png"
+            src="./images/flower-2.png"
             alt="Flower decoration"
             width={256}
             height={256}

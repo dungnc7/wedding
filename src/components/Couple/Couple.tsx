@@ -57,7 +57,7 @@ const Couple: React.FC = () => {
             role="Trưởng Nam"
             parents="Mã Hi Tuấn & Lê Thị Thúy Linh"
             address="Q. Bình Thạnh, TP. HCM"
-            image="/images/groom.jpg"
+            image="./images/groom.jpg"
             animation="left"
           />
           
@@ -66,7 +66,7 @@ const Couple: React.FC = () => {
             role="Trưởng Nữ"
             parents="Lại Duy Huệ & Trần Thị Hòa"
             address="Q. Bình Thạnh, TP. HCM"
-            image="/images/bride.jpg"
+            image="./images/bride.jpg"
             animation="right"
           />
         </div>

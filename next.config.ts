@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'export',
+  distDir: 'out',
   images: {
     unoptimized: true,
     disableStaticImages: false,
@@ -8,10 +10,8 @@ const nextConfig = {
     remotePatterns: [],
     formats: ['image/webp'],
   },
-  experimental: {
-    useDeploymentId: true,
-    useDeploymentIdServerActions: true,
-  },
+  basePath: process.env.NODE_ENV === 'production' ? '/wedding' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/wedding/' : '',
 };
 
 export default nextConfig;

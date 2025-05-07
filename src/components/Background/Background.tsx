@@ -26,7 +26,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
 
   if (!mounted) return null;
 
-  // Cấu hình cho hiệu ứng hoa rơi
+  // Sửa cấu hình để tương thích với phiên bản mới của tsparticles
   const flowersConfig = {
     particles: {
       number: {
@@ -43,12 +43,12 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
         type: "image",
         image: [
           {
-            src: "/images/flower-1.png",
+            src: "./images/flower-1.png",
             width: 32,
             height: 32
           },
           {
-            src: "/images/flower-2.png",
+            src: "./images/flower-2.png",
             width: 32,
             height: 32
           }
@@ -87,7 +87,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       }
     },
     interactivity: {
-      detect_on: "canvas",
+      detectsOn: "canvas",
       events: {
         onhover: {
           enable: true,
@@ -127,7 +127,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       shape: {
         type: "image",
         image: {
-          src: "/images/heart.svg", // Sử dụng file SVG trái tim
+          src: "./images/heart.svg", // Sửa đường dẫn để hoạt động với GitHub Pages
           width: 32,
           height: 32
         }
@@ -168,7 +168,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       }
     },
     interactivity: {
-      detect_on: "canvas",
+      detectsOn: "canvas", // Thay detect_on thành detectsOn
       events: {
         onhover: {
           enable: true,
@@ -250,7 +250,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       }
     },
     interactivity: {
-      detect_on: "canvas",
+      detectsOn: "canvas", // Thay detect_on thành detectsOn
       events: {
         onhover: {
           enable: true,
@@ -335,7 +335,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       }
     },
     interactivity: {
-      detect_on: "canvas",
+      detectsOn: "canvas", // Thay detect_on thành detectsOn
       events: {
         onhover: {
           enable: true,

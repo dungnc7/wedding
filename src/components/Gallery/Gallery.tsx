@@ -15,8 +15,8 @@ const Gallery: React.FC<GalleryProps> = ({ title = "Our Gallery", subtitle = "Sw
 
   // Example gallery images - update with your actual image paths
   const images = [
-    '/public/images/gallery/wedding1.jpg',
-    '/public/images/gallery/wedding2.jpg',
+    './images/gallery/wedding1.jpg',
+    './images/gallery/wedding2.jpg',
     // Add more images as needed
   ];
 
