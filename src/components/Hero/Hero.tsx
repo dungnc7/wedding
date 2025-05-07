@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import customLoader from '@/app/image-loader';
+import { withBasePath } from '@/utils/basePath';
 
 const Hero: React.FC = () => {
   return (
@@ -104,7 +105,7 @@ const Hero: React.FC = () => {
         <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
           <Image 
             loader={customLoader}
-            src="./images/flower-1.png"
+            src={withBasePath("images/flower-1.png")}
             alt="Flower decoration"
             width={256}
             height={256}
@@ -130,7 +131,7 @@ const Hero: React.FC = () => {
         <div className="relative w-full h-full" style={{ height: '100%', width: '100%' }}>
           <Image 
             loader={customLoader}
-            src="./images/flower-2.png"
+            src={withBasePath("images/flower-2.png")}
             alt="Flower decoration"
             width={256}
             height={256}

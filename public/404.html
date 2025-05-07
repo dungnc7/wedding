@@ -4,22 +4,82 @@
   <meta charset="utf-8">
   <title>Tâm & Yến - Wedding</title>
   <script type="text/javascript">
-    // Xử lý chuyển hướng cho GitHub Pages
-    (function() {
-      var segmentCount = 1; // Đặt bằng 1 cho repo GitHub Pages project (username.github.io/repo-name)
+    // Single Page Apps for GitHub Pages
+    // MIT License
+    // https://github.com/rafgraph/spa-github-pages
+    (function(l) {
+      if (l.search[1] === '/' ) {
+        var decoded = l.search.slice(1).split('&').map(function(s) { 
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+      
+      // Xử lý định tuyến cho GitHub Pages với subpath '/wedding'
+      var pathSegmentsToKeep = 1; // Giữ lại '/wedding' trong đường dẫn
+      var repo = '/wedding';
       
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
-        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
         (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
-    })();
+    }(window.location))
   </script>
 </head>
 <body>
-  <h1>Đang chuyển hướng...</h1>
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #333;
+      background: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 0 20px;
+    }
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      color: #4f8e62; /* Primary color */
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+    .loader {
+      margin: 30px auto;
+      border: 5px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 5px solid #4f8e62;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <div class="container">
+    <h1>Đang chuyển hướng...</h1>
+    <div class="loader"></div>
+    <p>Bạn đang được chuyển đến trang web đám cưới của Tâm & Yến.</p>
+    <p>Nếu bạn không được chuyển hướng tự động, vui lòng <a href="https://dungnc7.github.io/wedding/">bấm vào đây</a>.</p>
+  </div>
 </body>
 </html>

@@ -6,22 +6,16 @@ export default function customLoader({ src, width, quality }: ImageLoaderProps):
     return src;
   }
   
-  // Nếu trong môi trường production (GitHub Pages), sử dụng đường dẫn tương đối đúng
-  // với basePath '/wedding'
-  if (process.env.NODE_ENV === 'production') {
-    // Đảm bảo không có '/' ở đầu để tránh lỗi đường dẫn
-    if (src.startsWith('/')) {
-      src = src.slice(1);
-    }
-    
-    // Không thêm '/wedding' nếu src đã bắt đầu với './images/' hoặc 'images/'
-    if (src.startsWith('./') || !src.startsWith('/')) {
-      return src;
-    }
-    
-    return `/wedding${src}`;
-  }
+  // Loại bỏ dấu './' hoặc '/' ở đầu nếu có
+  const cleanedSrc = src.replace(/^\.?\/?/, '');
   
-  // Trong môi trường development, giữ nguyên hành vi
-  return src.startsWith('/') ? src : `/${src}`;
+  // Lấy đường dẫn cơ sở từ biến môi trường
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  
+  // Đảm bảo đường dẫn cơ sở kết thúc với dấu '/' nếu nó tồn tại
+  const normalizedBasePath = basePath ? 
+    (basePath.endsWith('/') ? basePath : `${basePath}/`) : 
+    '';
+  
+  return `${normalizedBasePath}${cleanedSrc}`;
 }

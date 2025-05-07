@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>Tâm & Yến - Wedding</title>
   <script type="text/javascript">
-    // Script xử lý single page routing cho GitHub Pages
+    // Xử lý định tuyến Single Page App cho GitHub Pages
+    // https://github.com/rafgraph/spa-github-pages
     (function(l) {
       if (l.search[1] === '/' ) {
         var decoded = l.search.slice(1).split('&').map(function(s) { 
@@ -16,9 +17,18 @@
       }
     }(window.location))
   </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#4f8e62" />
+  <meta name="description" content="Tâm & Yến - Wedding Invitation" />
+  <link rel="icon" href="favicon.ico" />
 </head>
 <body>
-  <!-- Nội dung này sẽ bị thay thế bởi Next.js -->
-  <div id="app">Đang tải trang web...</div>
+  <div id="app">Đang tải trang web đám cưới của Tâm & Yến...</div>
+  <noscript>
+    <div style="text-align: center; padding: 20px; font-family: sans-serif;">
+      <h1>JavaScript cần được bật</h1>
+      <p>Vui lòng bật JavaScript để xem trang web đám cưới của chúng tôi.</p>
+    </div>
+  </noscript>
 </body>
 </html>

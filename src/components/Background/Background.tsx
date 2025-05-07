@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import type { Container, Engine } from 'tsparticles-engine';
+import { withBasePath } from '@/utils/basePath';
 
 interface BackgroundProps {
   type?: 'hearts' | 'flowers' | 'petals' | 'bubbles';
@@ -43,12 +44,12 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
         type: "image",
         image: [
           {
-            src: "./images/flower-1.png",
+            src: withBasePath("images/flower-1.png"),
             width: 32,
             height: 32
           },
           {
-            src: "./images/flower-2.png",
+            src: withBasePath("images/flower-2.png"),
             width: 32,
             height: 32
           }
@@ -127,7 +128,7 @@ const Background = ({ type = 'hearts' }: BackgroundProps) => {
       shape: {
         type: "image",
         image: {
-          src: "./images/heart.svg", // Sửa đường dẫn để hoạt động với GitHub Pages
+          src: withBasePath("images/heart.svg"), // Sửa đường dẫn để hoạt động với GitHub Pages
           width: 32,
           height: 32
         }

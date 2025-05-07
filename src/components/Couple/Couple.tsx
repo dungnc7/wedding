@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import customLoader from '@/app/image-loader';
+import { withBasePath } from '@/utils/basePath';
 
 interface PersonProps {
   name: string;
@@ -57,7 +58,7 @@ const Couple: React.FC = () => {
             role="Trưởng Nam"
             parents="Mã Hi Tuấn & Lê Thị Thúy Linh"
             address="Q. Bình Thạnh, TP. HCM"
-            image="./images/groom.jpg"
+            image={withBasePath("images/groom.jpg")}
             animation="left"
           />
           
@@ -66,7 +67,7 @@ const Couple: React.FC = () => {
             role="Trưởng Nữ"
             parents="Lại Duy Huệ & Trần Thị Hòa"
             address="Q. Bình Thạnh, TP. HCM"
-            image="./images/bride.jpg"
+            image={withBasePath("images/bride.jpg")}
             animation="right"
           />
         </div>

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import customLoader from '@/app/image-loader';
+import { withBasePath } from '@/utils/basePath';
 
 interface GalleryProps {
   title?: string;
@@ -15,8 +16,8 @@ const Gallery: React.FC<GalleryProps> = ({ title = "Our Gallery", subtitle = "Sw
 
   // Example gallery images - update with your actual image paths
   const images = [
-    './images/gallery/wedding1.jpg',
-    './images/gallery/wedding2.jpg',
+    withBasePath('images/gallery/wedding1.jpg'),
+    withBasePath('images/gallery/wedding2.jpg'),
     // Add more images as needed
   ];
 

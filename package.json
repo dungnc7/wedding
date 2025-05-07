@@ -10,7 +10,9 @@
     "lint": "next lint",
     "export": "next build --no-lint",
     "predeploy": "npm run export",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out",
+    "deploy-gh": "node gh-deploy.js",
+    "deploy-custom": "node custom-export.js"
   },
   "dependencies": {
     "aos": "^2.3.4",
