@@ -17,18 +17,24 @@ const Hero = () => {
       const heart = document.createElement('div');
       heart.classList.add('heart');
 
-      // Vị trí ngẫu nhiên
+      // Vị trí ngẫu nhiên (cải tiến để phủ rộng hơn)
       heart.style.left = `${Math.random() * 100}%`;
+      
+      // Thêm điểm bắt đầu ở vị trí thấp hơn để trái tim bay lên từ dưới màn hình
+      heart.style.bottom = '-10px';
 
       // Thời gian animation ngẫu nhiên
-      const duration = Math.random() * 3 + 4; // 4-7s
+      const duration = Math.random() * 5 + 8; // 8-13s (dài hơn để nhìn thấy hiệu ứng rõ hơn)
       heart.style.animationDuration = `${duration}s`;
 
-      // Kích thước ngẫu nhiên
-      const size = Math.random() * 20 + 20; // 20-40px
+      // Kích thước đa dạng hơn
+      const size = Math.random() * 30 + 15; // 15-45px (đa dạng kích thước hơn)
       heart.style.width = `${size}px`;
       heart.style.height = `${size}px`;
       heart.style.backgroundImage = `url('/images/heart.svg')`;
+      
+      // Thêm độ trong suốt ngẫu nhiên
+      heart.style.opacity = `${Math.random() * 0.4 + 0.2}`; // 0.2-0.6
 
       heartContainer.appendChild(heart);
 
@@ -38,12 +44,12 @@ const Hero = () => {
       }, duration * 1000);
     };
 
-    // Tạo hearts định kỳ
-    const heartInterval = setInterval(createHeart, 1000);
+    // Tạo nhiều hearts hơn và thường xuyên hơn
+    const heartInterval = setInterval(createHeart, 600); // Mỗi 600ms tạo một trái tim (thay vì 1000ms)
 
-    // Tạo hearts ban đầu
-    for (let i = 0; i < 10; i++) {
-      setTimeout(createHeart, i * 300);
+    // Tạo nhiều hearts ban đầu
+    for (let i = 0; i < 25; i++) { // Tăng số lượng từ 10 lên 25
+      setTimeout(createHeart, i * 200); // Giảm thời gian giữa các trái tim
     }
 
     return () => {
@@ -102,7 +108,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className={styles.section}>
-      <div id="heartsContainer" className="absolute inset-0 pointer-events-none z-0"></div>
+      <div id="heartsContainer" className="absolute inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
       <div className="container z-10 py-10">
         <div data-aos="fade-down" data-aos-duration="1000">

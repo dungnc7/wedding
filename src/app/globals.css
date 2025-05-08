@@ -270,10 +270,10 @@
       opacity: 0;
     }
     10% {
-      opacity: 1;
+      opacity: 0.6;  /* Increased from 0.5 for better visibility */
     }
     90% {
-      opacity: 0.5;
+      opacity: 0.3;  /* Decreased slightly to create a fading effect */
     }
     100% {
       transform: translateY(-800px) rotate(360deg);
@@ -286,6 +286,8 @@
     animation: float 6s ease-in-out infinite;
     background-size: contain;
     background-repeat: no-repeat;
+    z-index: 1;  /* Make sure hearts appear above background but below content */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));  /* Add subtle glow effect */
   }
 }
 
