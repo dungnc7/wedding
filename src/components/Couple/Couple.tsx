@@ -67,7 +67,7 @@ const Couple = () => {
   return (
     <section id="couple" className={styles.section}>
       <div className="container mx-auto px-4">
-        <h2 className="section-title" data-aos="fade-up">Cô dâu & Chú rể</h2>
+        <h2 className="section-title" data-aos="fade-down">Cô dâu & Chú rể</h2>
         
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="md:w-5/12" data-aos="fade-right" data-aos-duration="1000">

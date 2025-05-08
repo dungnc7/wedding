@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar for all elements while maintaining scroll functionality */
+/* For Webkit browsers like Chrome/Safari */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 :root {
   --primary: #4f8e62;
   --primary-light: #e1f5e6;
@@ -52,6 +64,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%; /* Prevent elements from exceeding viewport width */
+}
+
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Hiệu ứng đổ bóng cho text đám cưới */
@@ -62,17 +80,28 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scrolling at the html level */
+    width: 100%;
+    position: relative;
   }
   
   body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--text);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
+    position: relative;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
+  }
+
+  /* Make responsive images */
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -80,14 +109,18 @@
   .container {
     @apply w-full mx-auto px-4;
     max-width: 80rem; /* 80rem = 1280px, equivalent to max-w-7xl in Tailwind v3 */
+    overflow-x: hidden; /* Prevent container overflow */
   }
   
   .section {
     @apply py-24 md:py-32;
+    padding-top: calc(6rem + 16px); /* Extra top padding to prevent title cut-off after animations */
+    margin-top: -16px; /* Negative margin to compensate for extra padding */
   }
   
   .section-title {
     @apply font-['Great_Vibes'] text-4xl md:text-5xl text-[var(--primary)] text-center mb-12;
+    padding-top: 16px; /* Add padding to prevent title cut-off */
   }
   
   .section-subtitle {
@@ -97,6 +130,7 @@
   /* Hero Section */
   .hero-names {
     @apply font-['Great_Vibes'] text-5xl md:text-7xl lg:text-8xl text-[var(--primary)] mb-5;
+    word-break: break-word;
   }
   
   .hero-intro {
@@ -130,6 +164,8 @@
   
   .person-image-container {
     @apply w-[250px] h-[250px] mx-auto mb-8 rounded-full border-4 border-[var(--primary-light)] overflow-hidden;
+    max-width: 80%;
+    max-height: 80vw;
   }
   
   .person-image {
@@ -160,6 +196,7 @@
   /* Gallery Section */
   .gallery-grid {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5;
+    overflow-x: hidden;
   }
   
   .gallery-item {
@@ -177,6 +214,7 @@
   /* QRCode Section */
   .qrcode-container {
     @apply grid grid-cols-1 md:grid-cols-2 gap-8;
+    overflow-x: hidden;
   }
   
   .qrcode-card {
@@ -248,5 +286,32 @@
     animation: float 6s ease-in-out infinite;
     background-size: contain;
     background-repeat: no-repeat;
+  }
+}
+
+/* Fix for mobile devices */
+@media screen and (max-width: 767px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Ensure hero section is fully contained */
+  .hero-names {
+    word-break: break-word;
+  }
+
+  /* Adjust grid layouts for mobile */
+  .gallery-grid, 
+  .qrcode-container {
+    overflow-x: hidden;
+  }
+
+  /* Handle any large elements */
+  .person-image-container {
+    max-width: 80%;
+    max-height: 80vw;
   }
 }
